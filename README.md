@@ -4,6 +4,6 @@
 Some basic javascript code I have done
 
 ```Javascript
-Syntax highlighted code block
+Basic Javascript code and content
 
 
