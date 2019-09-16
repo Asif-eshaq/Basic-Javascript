@@ -1,9 +1,10 @@
 
 ### Javascript
 
-Basic Javascript code and content
+Some basic javascript code I have done
+
 
 ```Javascript
-Some basic javascript code I have done
+Basic Javascript code and content
 
 
