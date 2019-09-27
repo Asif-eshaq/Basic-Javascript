@@ -33,3 +33,10 @@ log(function() {
     console.log('Hello');
 });
 
+function log(d) {
+    d();
+}
+log(function() {
+    console.log('Hello');
+});
+
