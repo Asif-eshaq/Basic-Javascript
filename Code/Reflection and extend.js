@@ -19,5 +19,3 @@ for (var prop in jack) {
     console.log(prop + ' : ' + jack[prop]);
     }
 }
-
-_.extend(jack);
