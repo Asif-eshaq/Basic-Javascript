@@ -5,15 +5,15 @@ const address = process.argv[2];
 if (!address) {
     console.log('Please for f@#k sake provide an address!');
 } else {
-    geoCode(address, (error, data) => {
+    geoCode(address, (error, {latitude, longitude, location}) => {
         if (error) {
             return console.log(error);
         }
-        foreCast(data.latitude, data.longitude, (error, forcastData) => {
+        foreCast(latitude, longitude, (error, forcastData) => {
             if (error) {
                 return console.log(error);
             }
-            console.log(data.location);
+            console.log(location);
             console.log(forcastData);
         });
     });    
