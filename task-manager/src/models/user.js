@@ -53,14 +53,14 @@ userSchema.methods.generateAuthToken = async function() {
     const user = this;
     const token = jwt.sign({_id : user._id.toString()}, 'Thisissecret');
 
-    user.tokens = user.tokens.concat({token}); // token : token
+    user.tokens = user.tokens.concat({token}); // {token : token}
     await user.save();
 
     return token;
 };
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email}); //{email : email}
+    const user = await User.findOne({email}); // {email : email}
     
     if (!user) {
         throw new Error('Unable to login');

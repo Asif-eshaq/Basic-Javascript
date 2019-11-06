@@ -15,13 +15,11 @@ const port = process.env.PORT || 3000;
 //     }
 // });
 
-app.use((req, res, next) => {
-    if (req.method === 'GET' || req.method === 'POST' || req.method === 'PATCH' || req.method === 'DEL') {
-        res.status(503).send('Maintaining the sight');
-    } else {
-        next();
-    }
-})
+// app.use((req, res, next) => {
+//     res.status(503).send("Site is currently down. Please try after sometime!");
+// });
+
+
 
 app.use(express.json());
 app.use(userRouter);
