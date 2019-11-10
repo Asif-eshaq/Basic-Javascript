@@ -19,8 +19,6 @@ const port = process.env.PORT || 3000;
 //     res.status(503).send("Site is currently down. Please try after sometime!");
 // });
 
-
-
 app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
@@ -29,6 +27,7 @@ app.listen(port, () => {
     console.log('Server is up on port ' + port);
 });
 
+// Hasing the password and matching it
 // const bcrypt = require('bcryptjs');
 
 // const myFunction = async () => {
@@ -42,14 +41,26 @@ app.listen(port, () => {
 //     console.log(isMatch);  
 // };
 
-const jwt = require('jsonwebtoken');
+// jeson web token
+// const jwt = require('jsonwebtoken');
 
-const myFunction = async () => {
-    const token = jwt.sign({_id : 'abc123'}, 'this is mynew course!', {expiresIn : '7 days'});
-    console.log(token);
+// const myFunction = async () => {
+//     const token = jwt.sign({_id : 'abc123'}, 'this is mynew course!', {expiresIn : '7 days'});
+//     console.log(token);
 
-    const data = jwt.verify(token, 'this is mynew course!');
-    console.log(data);
-};
+//     const data = jwt.verify(token, 'this is mynew course!');
+//     console.log(data);
+// };
 
-myFunction();
+// myFunction();
+
+// manipulating the object
+// const pet = {
+//     name : 'Kutta'
+// };
+
+// pet.toJSON = function () {
+//     return {};
+// };
+
+// console.log(JSON.stringify(pet));

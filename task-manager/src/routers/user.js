@@ -21,7 +21,7 @@ router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
-        res.send({user, token});
+        res.send({user : user, token});
     } catch (e) {
         res.status(400).send();
     }
@@ -60,22 +60,22 @@ router.get('/users/me', auth, async (req, res) => {
 });
 
 // Get users by id
-router.get('/users/:id', async (req, res) => {
-    const _id = req.params.id;
+// router.get('/users/:id', async (req, res) => {
+//     const _id = req.params.id;
 
-    try {
-        const user = await User.findById(_id);
-        if(!user) {
-            return res.status(404).send();
-        }
-        res.send(user);
-    } catch (e) {
-        res.status(500).send(e);
-    }
-});
+//     try {
+//         const user = await User.findById(_id);
+//         if(!user) {
+//             return res.status(404).send();
+//         }
+//         res.send(user);
+//     } catch (e) {
+//         res.status(500).send(e);
+//     }
+// });
 
 // Updating user
-router.patch('/users/:id', async (req, res) => {
+router.patch('/users/me', auth, async (req, res) => {
 
     // Code for invalid update
     const updates = Object.keys(req.body);
@@ -87,32 +87,33 @@ router.patch('/users/:id', async (req, res) => {
     }
     // Code for updating a data
     try {
-        const user = await User.findById(req.params.id);
+        // const user = await User.findById(req.params.id);
 
         // Dynamic update
-        updates.forEach((update) => user[update] = req.body[update]);
-        await user.save();
+        updates.forEach((update) => req.user[update] = req.body[update]);
+        await req.user.save();
 
-        if(!user) {
-            return res.status(404).send();
-        }
+        // if(!user) {
+        //     return res.status(404).send();
+        // }
 
-        res.send(user);
+        res.send(req.user);
     } catch (e) {
         res.status(400).send(e);
     }
 });
 
 // Delete user
-router.delete('/users/:id', async (req, res) => {
+router.delete('/users/me', auth, async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id);
+        // const user = await User.findByIdAndDelete(req.user._id);
 
-        if (!user) {
-            return res.status(404).send();
-        }
+        // if (!user) {
+        //     return res.status(404).send();
+        // }
 
-        res.send(user);
+        await req.user.remove();
+        res.send(req.user);
     } catch (e) {
         res.status(500).send(e);
     }
