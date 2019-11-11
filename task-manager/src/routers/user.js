@@ -10,7 +10,8 @@ router.post('/users', async (req, res) => {
     try {
         await user.save();
         const token = await user.generateAuthToken();
-        res.status(201).send({user, token}); // sends as objects   
+
+        res.status(201).send({user, token}); // sends as object 
     } catch (e) {
         res.status(400).send(e);
     }
@@ -21,6 +22,7 @@ router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
+
         res.send({user : user, token});
     } catch (e) {
         res.status(400).send();
@@ -79,23 +81,17 @@ router.patch('/users/me', auth, async (req, res) => {
 
     // Code for invalid update
     const updates = Object.keys(req.body);
-    const allowrdUpdates = ['name', 'email', 'password', 'age'];
-    const isValidOperation = updates.every((update) => allowrdUpdates.includes(update));
+    const allowedUpdates = ['name', 'email', 'password', 'age'];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
     if (!isValidOperation) {
         return res.status(400).send({'Error' : 'Invalid updates!'});
     }
     // Code for updating a data
     try {
-        // const user = await User.findById(req.params.id);
-
         // Dynamic update
         updates.forEach((update) => req.user[update] = req.body[update]);
         await req.user.save();
-
-        // if(!user) {
-        //     return res.status(404).send();
-        // }
 
         res.send(req.user);
     } catch (e) {
@@ -106,13 +102,8 @@ router.patch('/users/me', auth, async (req, res) => {
 // Delete user
 router.delete('/users/me', auth, async (req, res) => {
     try {
-        // const user = await User.findByIdAndDelete(req.user._id);
-
-        // if (!user) {
-        //     return res.status(404).send();
-        // }
-
         await req.user.remove();
+
         res.send(req.user);
     } catch (e) {
         res.status(500).send(e);

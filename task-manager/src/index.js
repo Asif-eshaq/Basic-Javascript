@@ -29,38 +29,45 @@ app.listen(port, () => {
 
 // Hasing the password and matching it
 // const bcrypt = require('bcryptjs');
-
 // const myFunction = async () => {
 //     const password = '12345red';
 //     const hashPassword = await bcrypt.hash(password, 8);
-
 //     console.log(password);
-//     console.log(hashPassword);
-    
+//     console.log(hashPassword);    
 //     const isMatch = await bcrypt.compare('12345red', hashPassword);
 //     console.log(isMatch);  
 // };
 
 // jeson web token
 // const jwt = require('jsonwebtoken');
-
 // const myFunction = async () => {
 //     const token = jwt.sign({_id : 'abc123'}, 'this is mynew course!', {expiresIn : '7 days'});
 //     console.log(token);
-
 //     const data = jwt.verify(token, 'this is mynew course!');
 //     console.log(data);
 // };
-
 // myFunction();
 
 // manipulating the object
 // const pet = {
 //     name : 'Kutta'
 // };
-
 // pet.toJSON = function () {
 //     return {};
 // };
-
 // console.log(JSON.stringify(pet));
+
+
+// user task relation
+// const Task = require('./models/task');
+// const User = require('./models/user');
+
+// const main = async () => {
+//     // const task = await Task.findById('5dc8a4969b485024fcb1ad55');
+//     // await task.populate('owner').execPopulate(); // populate = allow us to populate data from a relationship, execPopulate 
+//     // console.log(task.owner);
+//     const user = await User.findById('5dc8b7622b3d9c30bf42b217');
+//     await user.populate('tasks').execPopulate()
+//     console.log(user.tasks);    
+// };
+// main();
