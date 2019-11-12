@@ -20,12 +20,20 @@ router.post('/tasks', auth, async (req, res) => {
 
 
 // Query
-// GEt /tasks?completed=true/false
+// GET /tasks?completed=true/false
+// GET/tasks?limit=2&skip=2
+// GET/tasks?sortBy=createdAT:asc/:desc
 router.get('/tasks', auth, async (req, res) => {
     const match = {}
+    const sort = {}
 
     if (req.query.completed) {
-        match.completed = req.query.completed === 'true'
+        match.completed = req.query.completed === 'true';
+    }
+
+    if (req.query.sortBy) {
+        const parts = req.query.sortBy.split(':');
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1 // if -1 is false then the value after the colon will be true
     }
 
     try {
@@ -33,7 +41,12 @@ router.get('/tasks', auth, async (req, res) => {
 
         await req.user.populate({
             path : 'tasks',
-            match
+            match,
+            options : {
+                limit : parseInt(req.query.limit),
+                skip : parseInt(req.query.skip),
+                sort 
+            }
         }).execPopulate();
 
         res.send(req.user.tasks);

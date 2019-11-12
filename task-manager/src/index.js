@@ -1,4 +1,5 @@
 const express = require('express');
+const chalk = require('chalk');
 require('./db/mongoose');
 const userRouter = require('./routers/user');
 const taskRouter = require('./routers/task');
@@ -24,7 +25,7 @@ app.use(userRouter);
 app.use(taskRouter);
 
 app.listen(port, () => {
-    console.log('Server is up on port ' + port);
+    console.log(chalk.green.inverse.bold('Server is up on port ' + port));
 });
 
 // Hasing the password and matching it
