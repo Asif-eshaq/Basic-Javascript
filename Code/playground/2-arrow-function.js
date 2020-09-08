@@ -13,13 +13,13 @@
 
 
 const event = {
-    name : 'Birthday Party',
-    guestList : ['Jack', 'Putin', 'Osama', 'Trump'],
+    name: 'Birthday Party',
+    guestList: ['Jack', 'Putin', 'Osama', 'Trump'],
 
     // Arrow function doesnt work with this, Es6 method definition syntax
     printGuestList() {
         console.log(('Guest list for ' + this.name));
-        
+
         this.guestList.forEach((guest) => {
             console.log(guest + ' is attending ' + this.name);
         })

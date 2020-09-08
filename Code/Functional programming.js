@@ -23,18 +23,18 @@ function mapForEach(arr, fn) {
 var arr1 = [1, 2, 3];
 console.log(arr1);
 
-var arr2 = mapForEach(arr1, function(item) {
+var arr2 = mapForEach(arr1, function (item) {
     return item * 2;
 });
 console.log(arr2);
 
-var arr3 = mapForEach(arr1, function(item) {
+var arr3 = mapForEach(arr1, function (item) {
     return item < 2;
 });
 console.log(arr3);
 
 // Creating a function using function expression and using bind()
-var checkPastLimit = function(limiter, item) {
+var checkPastLimit = function (limiter, item) {
     return item > limiter;
 }
 var arr4 = mapForEach(arr1, checkPastLimit.bind(this, 1));
@@ -42,8 +42,8 @@ console.log(arr4);
 
 // simplified version
 // function that takes the limiter which returns the function to use and bind() preset the limiter
-var checkPastLimitSimplified = function(limiter) {
-    return function(limiter, item) {
+var checkPastLimitSimplified = function (limiter) {
+    return function (limiter, item) {
         return item > limiter;
     }.bind(this, limiter); // creating a function object and copying it with bind()
 };
